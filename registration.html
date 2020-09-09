@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=">
+  <title>Registration Form</title>
+</head>
+<body>
+<form>
+	<p align = "center">
+	Disclaimer: This registration form is for websites that involve online education, or a school's online website for profiling faculty <br> and students. Just contains some basics with the pecific requirements, along with two additional input types: "email" and "date". 
+	</p>
+	
+      <h1 style = "text-align:center;">Registration Form</h1>
+      <table align = "center">
+        <tr>
+          <td>Full Name:</td>
+		  <td>
+		  <input type="text" 
+                     id="frstName" 
+                     name="frstName"
+                     placeholder="First Name"
+                     />
+          <input type="text" 
+                     id="lstName" 
+                     name="lstName"
+                     placeholder="Last Name"
+                     />
+          </td>
+        </tr>
+		
+		<tr>
+			<td>Email:</td>
+			<td><input type="email" id="email" name="email"></td>
+		</tr>
+		
+        <tr>
+          <td>Password:</td>
+		  <td><input type="password" id="txtPassword" name="txtPassword" /></td>
+        </tr>
+		
+		<tr>
+			<td>Birthdate:</td> 
+			<td><input type="date" id="birthday" name="birthday"></td>
+		</tr>
+        
+        <tr>
+          <td>You are:</td>
+		  <td>
+            <input type="radio" 
+                   id="FMOType" 
+                   name="FMOType"
+                   value = "Female"
+                   selected="selected"/>
+            <label for="FMOType">Female</label>
+            
+            <input type="radio"
+                   id="FMOType"
+                   name="FMOType"
+                   value="Male"/>
+            <label for="FmType">Male</label> 
+			<input type="radio"
+                   id="FMOType"
+                   name="FMOType"
+                   value="Other"/>			
+          </td>
+        </tr>
+           
+		<tr>
+          <td colspan="2">
+            Position/Role:
+            <select name="drpRoleType" id="drpRoleType">
+              <option value="Student">Student</option>
+              <option value="Faculty">Faculty</option>
+            </select>
+          </td>
+        </tr>
+		
+		<tr>
+          <td colspan="2">
+            <input type="checkbox" 
+                   id="cbxPolicy1"
+                   name="cbxPolicy1"
+                   value="I accept lorem ipsum"/>
+            <label for="cbxPolicy1">I have read and accept the Terms and Conditions of this site.</label>
+          </td>
+        </tr>
+		
+        <tr>
+          <td colspan="2" align="right">
+            <button id="btnLogin" onClick="alert(document.getElementById('frstName').value)">Register</button>
+			<button id="btnReset" onClick="reset">Clear</button>
+			
+			
+          </td>
+        </tr>
+		
+      </table>
+  </form>
+</body>
+</html>
