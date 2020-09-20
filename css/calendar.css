@@ -1,0 +1,51 @@
+
+html
+	{
+		background-image: url('calendar.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: 100% 100%;
+	}
+
+*
+	{
+		font-weight:normal;
+		font-size: large;
+		font-family:serif;
+	}
+	
+div.topdesc
+	{
+		text-align: center;
+		line-height:1;
+		color: white;
+		font-size: 150%;
+		font-variant: small-caps;
+	}
+	
+table
+	{
+		margin-top: 70px;
+		background: rgba(9,172,218,0.5);
+	}
+
+table, th, td
+	{
+		margin-left:auto;
+		margin-right:auto;
+		border:1px solid white;
+		color: white;
+		opacity:1;
+	}
+
+#table_title
+	{
+		font-weight:500;
+		font-size:200%;
+		font-variant: small-caps;
+	}
+			
+#day
+	{
+		background-color:#7EE9FF;
+	}
