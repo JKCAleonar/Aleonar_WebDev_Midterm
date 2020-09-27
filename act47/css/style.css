@@ -1,0 +1,103 @@
+/*tribute*/
+body
+{
+	background-image: url('images/country.gif');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+
+.page_title
+{
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	clear: both;
+	padding-top: 80px;	
+}
+
+.content_container 
+{
+	background-color: rgb(0,0,0); 
+	background-color: rgba(0,0,0, 0.4);
+	color: white;
+	font-style: serif;
+	font-style: italic;
+	font-size: 18px;
+	font-weight: bold;
+	border: 3px solid #f1f1f1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	width: 40%;
+	padding: 40px;
+	text-align: center;
+	margin-top: 40px;
+}
+
+#LClosed
+{
+	width: 100px;
+	height: 65px;
+}
+
+/*Not Main Pages*/
+a[class^=back]
+{
+	text-decoration: none;
+	color: white;
+}
+
+ul
+{
+	list-style: none;
+}
+
+#nav
+{
+	font-style: serif;
+	font-style: italic;
+	font-size: 18px;
+	font-weight: bold;
+	float:left;
+	margin-left: 250px;
+	margin-top: 40px;
+}
+
+
+p[id$=title]
+{
+	margin-top:-20px;
+	float: center;
+	font-size: 25px;
+	
+}
+
+div[id*=text]
+{
+	float:right;
+	width: 420px;
+	text-align: justify;
+}
+
+div[id^=image]
+{
+	float:left;
+}
+
+
+/*tributeP*/
+
+
+
+
+
+/*tributeS*/
+
+/*tributeC*/
+
+/*tributeL*/
+
+
