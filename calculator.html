@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Seatwork_Calculator</title>
+		<link rel="stylesheet" type="text/css" href="calcstyle.css" />
+    </head>
+    <body>
+      <div id="ccontainer">
+			<form name="calc">
+				<input type="text" name="answer" />
+				<br>
+        
+        <input type="button" value=" 7 " onclick="calc.answer.value += '7'" />
+				<input type="button" value=" 8 " onclick="calc.answer.value += '8'" />
+				<input type="button" value=" 9 " onclick="calc.answer.value += '9'" />
+				<input type="button" value=" x " onclick="calc.answer.value += '*'" />
+				<br>
+        
+        <input type="button" value=" 4 " onclick="calc.answer.value += '4'" />
+				<input type="button" value=" 5 " onclick="calc.answer.value += '5'" />
+				<input type="button" value=" 6 " onclick="calc.answer.value += '6'" />
+				<input type="button" value=" - " onclick="calc.answer.value += '-'" />
+				<br>
+				
+				<input type="button" value=" 1 " onclick="calc.answer.value += '1'" />
+				<input type="button" value=" 2 " onclick="calc.answer.value += '2'" />
+				<input type="button" value=" 3 " onclick="calc.answer.value += '3'" />
+				<input type="button" value=" + " onclick="calc.answer.value += '+'" />
+				<br>
+        
+				<input type="button" value=" Clr " onclick="calc.answer.value = ''" />
+				<input type="button" value=" 0 " onclick="calc.answer.value += '0'" />
+				<input type="button" value=" = " onclick="calc.answer.value = eval(calc.answer.value)" />
+				<input type="button" value=" ÷ " onclick="calc.answer.value += '/'" />
+				<br>
+			</form>
+        </div>
+    </body>
+</html>
