@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang= "en">
+	<head>
+		<title>MExam Prt2a - Input Form</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/inputstyle.css" />
+		<script>
+		<!--For the interactive canvas (for the input signature), my full gratitude to "Zetakey HTML5" Code Samples-->
+			function signatureCapture() 
+			{
+				var canvas = document.getElementById("newSignature");
+				var context = canvas.getContext("2d");
+				canvas.width = 110;
+				canvas.height = 70;
+				context.fillStyle = "#fff";
+				context.strokeStyle = "#444";
+				context.lineWidth = 1.5;
+				context.lineCap = "round";
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				var disableSave = true;
+				var pixels = [];
+				var cpixels = [];
+				var xyLast = {};
+				var xyAddLast = {};
+				var calculate = false;
+				{   //functions
+					function remove_event_listeners() {
+					  canvas.removeEventListener('mousemove', on_mousemove, false);
+					  canvas.removeEventListener('mouseup', on_mouseup, false);
+					  canvas.removeEventListener('touchmove', on_mousemove, false);
+					  canvas.removeEventListener('touchend', on_mouseup, false);
+
+					  document.body.removeEventListener('mouseup', on_mouseup, false);
+					  document.body.removeEventListener('touchend', on_mouseup, false);
+					}
+
+					function get_coords(e) {
+					  var x, y;
+
+					  if (e.changedTouches && e.changedTouches[0]) {
+						var offsety = canvas.offsetTop || 0;
+						var offsetx = canvas.offsetLeft || 0;
+
+						x = e.changedTouches[0].pageX - offsetx;
+						y = e.changedTouches[0].pageY - offsety;
+					  } else if (e.layerX || 0 == e.layerX) {
+						x = e.layerX;
+						y = e.layerY;
+					  } else if (e.offsetX || 0 == e.offsetX) {
+						x = e.offsetX;
+						y = e.offsetY;
+					  }
+
+					  return {
+						x : x, y : y
+					  };
+					};
+
+					function on_mousedown(e) {
+					  e.preventDefault();
+					  e.stopPropagation();
+
+					  canvas.addEventListener('mouseup', on_mouseup, false);
+					  canvas.addEventListener('mousemove', on_mousemove, false);
+					  canvas.addEventListener('touchend', on_mouseup, false);
+					  canvas.addEventListener('touchmove', on_mousemove, false);
+					  document.body.addEventListener('mouseup', on_mouseup, false);
+					  document.body.addEventListener('touchend', on_mouseup, false);
+
+					  empty = false;
+					  var xy = get_coords(e);
+					  context.beginPath();
+					  pixels.push('moveStart');
+					  context.moveTo(xy.x, xy.y);
+					  pixels.push(xy.x, xy.y);
+					  xyLast = xy;
+					};
+
+					function on_mousemove(e, finish) {
+					  e.preventDefault();
+					  e.stopPropagation();
+
+					  var xy = get_coords(e);
+					  var xyAdd = {
+						x : (xyLast.x + xy.x) / 2,
+						y : (xyLast.y + xy.y) / 2
+					  };
+
+					  if (calculate) {
+						var xLast = (xyAddLast.x + xyLast.x + xyAdd.x) / 3;
+						var yLast = (xyAddLast.y + xyLast.y + xyAdd.y) / 3;
+						pixels.push(xLast, yLast);
+					  } else {
+						calculate = true;
+					  }
+
+					  context.quadraticCurveTo(xyLast.x, xyLast.y, xyAdd.x, xyAdd.y);
+					  pixels.push(xyAdd.x, xyAdd.y);
+					  context.stroke();
+					  context.beginPath();
+					  context.moveTo(xyAdd.x, xyAdd.y);
+					  xyAddLast = xyAdd;
+					  xyLast = xy;
+
+					};
+
+					function on_mouseup(e) {
+					  remove_event_listeners();
+					  disableSave = false;
+					  context.stroke();
+					  pixels.push('e');
+					  calculate = false;
+					};
+				}
+			  canvas.addEventListener('touchstart', on_mousedown, false);
+			  canvas.addEventListener('mousedown', on_mousedown, false);
+			}
+
+			function signatureClear() {
+			  var canvas = document.getElementById("newSignature");
+			  var context = canvas.getContext("2d");
+			  context.clearRect(0, 0, canvas.width, canvas.height);
+			}
+		</script>
+	</head>
+	<body>
+	<form>
+		<img id="inv_title" src="css/images/invoice.png">
+		<div id="tops">
+			<p class="top_amount">$<input type="number" 
+                     id="top_amnt" 
+                     name="top_amnt"
+                     placeholder="2112.25"
+                     /></p>
+			<p class="top_title">GRAND TOTAL</p>
+		</div>
+		<!--top/lean-right part-->
+		<div id="table_one">
+			<table>
+				<tr>
+					<td>Invoice No : #  
+					<input type="number" 
+                     id="inv_no" 
+                     name="inv_no"
+                     placeholder="8262"
+                     /></td>
+					<br>
+				</tr>
+				
+				<tr>
+					<td>Due to Date :<input type="date" 
+                     id="due_dt" 
+                     name="due_dt"
+                     /></td>
+				</tr>
+				
+				<tr>
+					<td>Client :
+					<br><div class="non-bold"><input type="number" 
+                     id="inv_num1" 
+                     name="inv_no"
+                     placeholder="(04) 298 1092 1092"
+                     />
+					<br><input type="number" 
+                     id="inv_num1" 
+                     name="inv_no"
+                     placeholder="+76 209 3095 1092"
+                     />
+					<br><input type="email" 
+                     id="inv_email" 
+                     name="inv_email"
+                     placeholder="philstanford@email.com"
+                     />
+					</div></td>
+				</tr>
+				
+			</table>
+		</div>
+		<!--top/lean-left img part-->
+		<div>
+		<img id="comp_logo" src="css/images/logo.png">
+		</div>
+			<!--mid/mid part-->
+			<table id= "table_two">
+				<tr class="dark_purp">
+					<td class="center_tds">QTY.</td>
+					<td>DESCRIPTION</td>
+					<td>PRICE</td>
+					<td class="bold_tds">TOTAL</td>
+				</tr>
+				<tr>
+					<td class="center_tds"><input type="number" 
+                     id="qty_no" 
+                     name="qty_no"
+                     placeholder="1"
+                     /></td>
+					 <td>
+					 <select name="inv_desc" id="inv_desc">
+						<option value="webdes">Web Design</option>
+						<option value="brand">Branding</option>
+						<option value="graphdes">Graphic Design</option>
+						<option value="webdev">Web Development</option>
+					</select></td>
+					<td>$<input type="number" 
+                     id="prc" 
+                     name="prc"
+                     placeholder="200.00"
+                     /></td>
+					<td> $<input type="number" 
+                     id="prct" 
+                     name="prct"
+                     placeholder="200.00"
+                     /></td>
+				</tr>
+				
+				<tr class="light_purp">
+					<td class="center_tds"><input type="number" 
+                     id="qty_no2" 
+                     name="qty_no"
+                     placeholder="1"
+                     /></td>
+					<td>
+					 <select name="inv_desc" id="inv_desc">
+						<option value="brand">Branding</option>
+						<option value="webdes">Web Design</option>					
+						<option value="graphdes">Graphic Design</option>
+						<option value="webdev">Web Development</option>
+					</select></td></td>
+					<td>$<input type="number" 
+                     id="prc2" 
+                     name="prc"
+                     placeholder="350.00"
+                     /></td>
+					<td> $<input type="number" 
+                     id="prct2" 
+                     name="prct"
+                     placeholder="350.00"
+                     /></td>
+				</tr>
+				
+				<tr>
+					<td class="center_tds"><input type="number" 
+                     id="qty_no" 
+                     name="qty_no"
+                     placeholder="27"
+                     /></td>
+					<td class="white_row">
+					 <select name="inv_desc" id="inv_desc">
+						<option value="graphdes">Graphic Design</option>
+						<option value="webdes">Web Design</option>
+						<option value="brand">Branding</option>
+						<option value="webdev">Web Development</option>
+					</select></td>
+					<td>$<input type="number" 
+                     id="prc" 
+                     name="prc"
+                     placeholder="50.00"
+                     /></td>
+					<td> $<input type="number" 
+                     id="prct" 
+                     name="prct"
+                     placeholder="1485.00"
+                     /></td>
+				</tr>
+				
+				<tr class="light_purp">
+					<td class="center_tds"><input type="number" 
+                     id="qty_no2" 
+                     name="qty_no"
+                     placeholder="1"
+                     /></td>
+					<td class="white_row"><select name="inv_desc" id="inv_desc">
+						<option value="webdev">Web Development</option>
+						<option value="webdes">Web Design</option>
+						<option value="brand">Branding</option>
+						<option value="graphdes">Graphic Design</option>
+					</select></td>
+					<td>$<input type="number" 
+                     id="prc2" 
+                     name="prc"
+                     placeholder="450.00"
+                     /></td>
+					<td> $<input type="number" 
+                     id="prct2" 
+                     name="prct"
+                     placeholder="450.00"
+                     /></td>
+				</tr>
+				
+				<tr class="subtot_row">
+					<td></td>
+					<td>SUB TOTAL <br> TAX(15%)</td>
+					<td></td>
+					<td> $<input type="number" 
+                     id="sub_tot" 
+                     name="sub_tot"
+                     placeholder="2485.00"
+                     /><br>$<input type="number" 
+                     id="tax_tot" 
+                     name="tax_tot"
+                     placeholder="2112.25"
+                     /></td>
+				</tr>
+				
+				<tr class="grandtot_row">
+					<td></td>
+					<td>GRAND TOTAL</td>
+					<td></td>
+					<td class="big_tds" colspan="2">$<input type="number" 
+                     id="grand_tot" 
+                     name="grand_tot"
+                     placeholder="2112.25"
+                     /></td>
+				</tr>
+				
+			</table>
+			
+			<!--bottom/lean-left part-->
+			<div id="bottom_words">
+				<p class="nrwbld_text"><input type="text" 
+                     id="client_name" 
+                     name="iclient_name"
+                     placeholder="Enter Client Name"
+                     /></p> 
+				<textarea id="address" placeholder="850 Sylvan Street
+				South Angelino, SW"></textarea>
+				
+				<p class="bigbold_txt">THANK YOU!</p>
+				<p class="smllbold_txt">PLEASURE DOING BUSINESS WITH YOU!</p>
+			</div>
+			<!--bottom/lean-right part-->
+			<div id="sign_right">
+			<p class="smllcaps_txt">SIGNATURE</p>
+					<canvas class="roundCorners" id="newSignature"></canvas>
+					<script>signatureCapture();</script>
+			</div>
+			<button type="button" onclick="signatureClear()">Clear signature</button>
+		
+			<footer>
+				Molly's | (04) 092 1092 3095 | +76 209 5096 1092 | info@mollys.com | Rodeo Drive, Berverly Hills, California, 4511
+			</footer>
+			</form>
+				
+		
+	</body>
+
+</html>
